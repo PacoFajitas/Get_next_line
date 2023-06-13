@@ -6,7 +6,7 @@
 /*   By: tfiguero <tfiguero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:43:25 by tfiguero          #+#    #+#             */
-/*   Updated: 2023/06/12 20:29:49 by tfiguero         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:53:25 by tfiguero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_fill_data(char *data, int fd, int flag)
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (ft_free(&data));
-	while (!ft_strchr(data, '\n') && flag > 0)
+	while (flag > 0 && !ft_strchr(data, '\n'))
 	{
 		flag = read(fd, buffer, BUFFER_SIZE);
 		if (flag == -1)
@@ -39,10 +39,7 @@ char	*ft_fill_data(char *data, int fd, int flag)
 		{
 			data = ft_strjoin(data, buffer);
 			if (!data)
-			{
-				//free(buffer); Si descomento esto me da ko abort en todos los nullchecks KO
-				return (NULL);
-			}
+				return (ft_free(&buffer));
 		}
 	}
 	free (buffer);
@@ -64,7 +61,7 @@ char	*ft_clean_buffer(char *data)
 	len_nl = ft_strlen(ft_strchr(data, '\n') + 1);
 	nl = (char *)malloc((len_nl + 1) * sizeof(char));
 	if (!nl)
-		return (NULL);
+		return (ft_free(&data));
 	nl[len_nl] = '\0';
 	x = 0;
 	data = ft_strchr(data, '\n') + 1;
@@ -82,7 +79,7 @@ char	*ft_clean_buffer(char *data)
 
 char	*get_next_line(int fd)
 {
-	static char	*data;
+	static char	*data = NULL;
 	char		*ret;
 
 	if (fd < 0)
@@ -104,8 +101,6 @@ char	*get_next_line(int fd)
 		if (!ret)
 			return (ft_free(&data));
 		data = ft_clean_buffer(data);
-		if (!data)
-			return (ft_free(&data));
 	}
 	else
 	{
