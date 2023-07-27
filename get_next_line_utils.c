@@ -6,7 +6,7 @@
 /*   By: tfiguero <tfiguero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:44:01 by tfiguero          #+#    #+#             */
-/*   Updated: 2023/06/13 21:05:20 by tfiguero         ###   ########.fr       */
+/*   Updated: 2023/07/13 19:25:17 by tfiguero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 size_t	ft_strlen(const char *s)
 {
-  size_t	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
-	i++;
+		i++;
 	return (i);
 }
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char		*str;
+	char	*str;
 	size_t	i;
 	size_t	j;
 
@@ -36,7 +36,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		len = (ft_strlen(s + start));
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (str == NULL)
-		return  (NULL);
+		return (NULL);
 	i = start;
 	while (s[i] && j < len)
 	{
@@ -50,14 +50,14 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 char	*ft_strchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0') 
 	{
 		if (s[i] == (unsigned char)c)
-		return ((char *)&s[i]);
-	i++;
+			return ((char *)&s[i]);
+		i++;
 	}
 	return (NULL);
 }
@@ -66,7 +66,7 @@ char	*ft_strjoin(char *ret, char *s2)
 {
 	size_t	i;
 	size_t	j;
-	char		*str;
+	char	*str;
 
 	i = 0;
 	j = 0;

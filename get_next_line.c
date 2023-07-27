@@ -6,7 +6,7 @@
 /*   By: tfiguero <tfiguero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:43:25 by tfiguero          #+#    #+#             */
-/*   Updated: 2023/06/13 20:53:25 by tfiguero         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:03:47 by tfiguero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,24 @@ char	*ft_clean_buffer(char *data)
 	return (data);
 }
 
+char	*ft_else(char **data, char **ret)
+{
+	if (ft_strchr(*data, '\n'))
+	{
+		*ret = ft_substr(*data, 0, ft_strlen(*data) - ft_strlen(ft_strchr
+					(*data, '\n')) + 1);
+		if (!*ret)
+			return (ft_free(data));
+		*data = ft_clean_buffer(*data);
+	}
+	else
+	{
+		*ret = *data;
+		*data = NULL;
+	}
+	return (*ret);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*data = NULL;
@@ -94,18 +112,5 @@ char	*get_next_line(int fd)
 	data = ft_fill_data(data, fd, 1);
 	if (!data)
 		return (NULL);
-	if (ft_strchr(data, '\n'))
-	{
-		ret = ft_substr(data, 0, ft_strlen(data) - ft_strlen(ft_strchr
-					(data, '\n')) + 1);
-		if (!ret)
-			return (ft_free(&data));
-		data = ft_clean_buffer(data);
-	}
-	else
-	{
-		ret = data;
-		data = NULL;
-	}
-	return (ret);
+	return (ft_else(&data, &ret));
 }

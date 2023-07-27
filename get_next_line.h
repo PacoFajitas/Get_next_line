@@ -6,7 +6,7 @@
 /*   By: tfiguero <tfiguero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:43:40 by tfiguero          #+#    #+#             */
-/*   Updated: 2023/06/12 19:40:44 by tfiguero         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:52:55 by tfiguero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 500000000
+#  define BUFFER_SIZE 123421823701270
 # endif
 
 # include <unistd.h>
